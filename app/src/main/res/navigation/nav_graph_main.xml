@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.rfrost.navigationsample.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/main_fragment">
+        <action
+            android:id="@+id/action_mainFragment_to_gameFragment"
+            app:destination="@id/gameFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.rfrost.navigationsample.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/settings_fragment" />
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.rfrost.navigationsample.GameFragment"
+        android:label="GameFragment"
+        tools:layout="@layout/game_fragment">
+        <action
+            android:id="@+id/action_gameFragment_to_resultFragment"
+            app:destination="@id/resultFragment"
+            app:popUpTo="@+id/mainFragment" />
+        <argument
+            android:name="screenName"
+            app:argType="string" />
+        <argument
+            android:name="userName"
+            android:defaultValue="name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.rfrost.navigationsample.ResultFragment"
+        android:label="ResultFragment"
+        tools:layout="@layout/result_fragment">
+        <argument
+            android:name="userName"
+            android:defaultValue="name"
+            app:argType="string" />
+        <deepLink
+            android:autoVerify="true"
+            app:uri="http://www.google.com" />
+        <deepLink app:uri="navsample://result/userName/{userName}" />
+    </fragment>
+    <activity
+        android:id="@+id/detailActivity"
+        android:name="com.rfrost.navigationsample.DetailActivity"
+        android:label="detail_activity"
+        tools:layout="@layout/detail_activity" />
+</navigation>
